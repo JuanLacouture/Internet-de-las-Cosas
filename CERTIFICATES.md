@@ -227,7 +227,7 @@ NIST está estandarizando algoritmos resistentes:
 
 ---
 
-### Referencias
+## Referencias
 
 - [RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3](https://datatracker.ietf.org/doc/html/rfc8446)
 - [Mozilla - TLS Overview](https://wiki.mozilla.org/Security/Server_Side_TLS)
@@ -243,4 +243,20 @@ NIST está estandarizando algoritmos resistentes:
 
 ---
 
+## Referencias utilizadas para la ejecución del proyecto TLS
 
+- Pasos seguidos según la guía publicada en la wiki del equipo: [TLS Setup Wiki](https://github.com/JuanLacouture/Internet-de-las-Cosas/wiki/Protocolo-TLS-y-certificados)
+- Código de pruebas ejecutado desde el repositorio oficial: [Repositorio TLS](https://github.com/JuanLacouture/Internet-de-las-Cosas/blob/main/Codigos/parcial2.ino) 
+- Configuración Principal: [Código de Llamados](https://github.com/JuanLacouture/Internet-de-las-Cosas/blob/main/Codigos/config.h)
+
+## Uso de TLS en el Proyecto (Resumen)
+
+| Sección (Wiki) | Uso de TLS |
+|----------------|-----------|
+| **Paso 1** | Cambio a `MQTT_PORT 8883` → **TLS obligatorio** |
+| **Paso 2** | `#include <WiFiClientSecure.h>` + `WiFiClientSecure netClient` → **cliente TLS** |
+| **Paso 3** | `netClient.setCACert(MQTT_ROOT_CA)` → **validación de certificado** |
+| **Paso 4** | Carga de `mosquitto.org.crt` + `configTime()` → **CA + hora para handshake TLS** |
+| **Resultado** | `rc=-2` → éxito con TLS + CA + NTP |
+
+---
